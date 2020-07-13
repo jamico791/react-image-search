@@ -7,13 +7,14 @@ function App() {
   const [images, setImages] = useState([])
   const API_URL = 'https://nature-image-api.now.sh/search?q='
   
-  function handleChange(event) {
+  const handleChange = (event) => {
     setSearchTerm(event.target.value)  
   }
 
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     setLoading(true)
+    setImages([])
     const response = await fetch(`${API_URL}${searchTerm}`)
     const json = await response.json()
     setImages(json.images.map(item => <img key={item.title} src={item.image} alt={searchTerm} />))
